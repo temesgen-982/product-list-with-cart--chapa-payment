@@ -46,7 +46,7 @@ export async function POST({ request }) {
     "last_name": clientData.lastName,
     "phone_number": clientData.phoneNumber,
     "tx_ref": tx_ref,
-    "return_url": CHAPA_RETURN_URL,
+    "return_url": `${CHAPA_RETURN_URL}?tx_ref=${tx_ref}`,
     "customization[title]": "Payment for product",
   })
 

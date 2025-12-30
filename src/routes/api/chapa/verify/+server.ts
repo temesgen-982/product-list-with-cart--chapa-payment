@@ -28,20 +28,35 @@ export async function GET({ url }) {
 
         const result = await response.json();
 
-        if (response.ok && result.data.status === 'success') {
+        if (result.status === 'success' && result.data && result.data.status === 'success') {
             // database update
             console.log(`VERIFICATION SUCCESS for TX: ${tx_ref}. Amount: ${result.data.amount}`);
 
             // Update store if not already updated
             updateTransactionStatus(tx_ref, 'success');
 
-            return new Response(JSON.stringify({ message: "Verification received and processed." }), { status: 200 });
+            return new Response(JSON.stringify({ status: 'success', message: "Verification received and processed." }), { 
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
 
         } else {
             // failed/pending status
-            console.error(`VERIFICATION FAILED for TX: ${tx_ref}. Status: ${result.data.status}`);
-            updateTransactionStatus(tx_ref, 'failed');
-            return new Response('Verification failed.', { status: 200 });
+            const chapaStatus = result.data?.status || 'unknown';
+            console.warn(`VERIFICATION PENDING/FAILED for TX: ${tx_ref}. Chapa Status: ${chapaStatus}`);
+            
+            // Only mark as failed if explicitly failed, otherwise keep as pending
+            if (chapaStatus === 'failed') {
+                updateTransactionStatus(tx_ref, 'failed');
+            }
+            
+            return new Response(JSON.stringify({ 
+                status: chapaStatus, 
+                message: result.message || 'Verification failed or pending.' 
+            }), { 
+                status: 200,
+                headers: { 'Content-Type': 'application/json' }
+            });
         }
     } catch (err) {
         console.error('Verification Handler Server Error:', err);
