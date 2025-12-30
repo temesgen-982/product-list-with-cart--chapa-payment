@@ -1,36 +1,3 @@
-# sv
-
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
-
-## Developing
-
-Install dependencies:
-
-```bash
- npm install # (or `pnpm install` or `yarn`),
-```
-
-start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
 # Frontend Mentor - Product list with cart solution
 
 This is a solution to the [Product list with cart challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
@@ -63,40 +30,36 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
+![](static/assets/screenshot-1.png)
+![](static/assets/screenshot-2.png)
+s
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Frontendmentor](https://www.frontendmentor.io/solutions/product-list-with-cart-chapa-payment-integrated-VnBLfWHjMd)
+- Live Site URL: [Vercel](https://product-list-with-cart-delta-ten.vercel.app/)
 
 ## My process
 
 ### Built with
 
 - Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
+- Tailwind CSS
+- [Svelte](https://svelte.dev/)
+- [Chapa](https://developer.chapa.co/)
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+- Initiating a payment and verifying the payment using Chapa API.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [Chapa Documentation](https://developer.chapa.co/) - The documentation helped me on how to initiate a transaction and verify the transaction.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Website - [Temesgen Adane](https://temesgen.vercel.app)
+- Frontend Mentor - [@temesgen-982](https://www.frontendmentor.io/profile/temesgen-982)
