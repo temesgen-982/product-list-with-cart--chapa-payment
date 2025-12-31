@@ -19,22 +19,35 @@ export interface CartItem {
 
 export const cartItems = $state<CartItem[]>([]);
 
-// add a product to the cart
-export function addToCart(product: Product) {
-    const existingItem = cartItems.find(item => item.name === product.name);
+const totalQuantityDerived = $derived(cartItems.reduce((total, item) => total + item.quantity, 0));
+const totalPriceDerived = $derived(cartItems.reduce((total, item) => total + item.price * item.quantity, 0));
 
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cartItems.push({
-            name: product.name,
-            price: product.price,
-            quantity: 1,
-            thumbnail: product.image.thumbnail
-        });
-    }
+export const getTotalQuantity = () => totalQuantityDerived;
+export const getTotalPrice = () => totalPriceDerived;
+
+export function getCartItem(productName: string) {
+	return cartItems.find((item) => item.name === productName);
 }
 
+export function isInCart(productName: string) {
+	return cartItems.some((item) => item.name === productName);
+}
+
+// add a product to the cart
+export function addToCart(product: Product) {
+	const existingItem = getCartItem(product.name);
+
+	if (existingItem) {
+		existingItem.quantity += 1;
+	} else {
+		cartItems.push({
+			name: product.name,
+			price: product.price,
+			quantity: 1,
+			thumbnail: product.image.thumbnail
+		});
+	}
+}
 // remove a product from the cart
 export function removeFromCart(productName: string) {
 	const index = cartItems.findIndex((item) => item.name == productName);
@@ -45,7 +58,7 @@ export function removeFromCart(productName: string) {
 
 // increment quantity of a product in the cart
 export function increment(productName: string) {
-	const item = cartItems.find((item) => item.name === productName);
+	const item = getCartItem(productName);
 	if (item) {
 		item.quantity += 1;
 	}
@@ -53,7 +66,7 @@ export function increment(productName: string) {
 
 // decrements quantity
 export function decrement(productName: string) {
-	const item = cartItems.find((item) => item.name === productName);
+	const item = getCartItem(productName);
 	if (item) {
 		if (item.quantity > 1) {
 			item.quantity -= 1;
@@ -65,5 +78,6 @@ export function decrement(productName: string) {
 
 // clear all products
 export function clearCart() {
-    cartItems.splice(0, cartItems.length);
+	cartItems.length = 0;
 }
+
