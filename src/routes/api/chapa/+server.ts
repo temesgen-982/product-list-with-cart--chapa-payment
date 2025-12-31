@@ -5,7 +5,7 @@ import productData from '$lib/data/data.json';
 
 export async function POST({ request }) {
   const clientData = await request.json();
-  const tx_ref = `tx-${Date.now()}`;
+  const tx_ref = `tx-${crypto.randomUUID()}`;
 
   // Calculate total amount server-side
   let calculatedTotal = 0;
