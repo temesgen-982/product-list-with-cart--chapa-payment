@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { cartItems } from '$lib/cart.svelte.js';
+    import { cartItems, getTotalPrice } from '$lib/cart-state.svelte';
     import { goto } from '$app/navigation';
 
     let firstName = $state('');
@@ -10,7 +10,7 @@
     let isLoading = $state(false);
     let errorMessage = $state<string | null>(null);
 
-    const total = $derived(cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0));
+    const total = $derived(getTotalPrice());
 
     async function proceedToPayment() {
         isLoading = true;

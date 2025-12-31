@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { Product as ProductType } from '$lib/cart.svelte.js';
+	import type { Product as ProductType } from '$lib/cart-state.svelte';
 	let { product }: { product: ProductType } = $props();
 
-	import { cartItems, addToCart, increment, decrement } from '$lib/cart.svelte.js';
+	import { isInCart, getCartItem, addToCart, increment, decrement } from '$lib/cart-state.svelte';
 
-	const cartItem = $derived(cartItems.find((item) => item.name === product.name));
-	const inCart = $derived(!!cartItem);
+	const cartItem = $derived(getCartItem(product.name));
+	const inCart = $derived(isInCart(product.name));
 </script>
 
 <div class="flex flex-col justify-center gap-1">

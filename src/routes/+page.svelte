@@ -3,14 +3,12 @@
 	import Cart from '$lib/Cart.svelte';
 	import OrderDialog from '$lib/OrderDialog.svelte';
 
-	import type { Product } from '$lib/cart.svelte.ts';
+	import type { Product } from '$lib/cart-state.svelte';
 
-	let products = $state<Product[]>([]);
+	let { data } = $props();
+	let products = $derived(data.items);
 
-  let { data } = $props();
-  products = data.items;
-
-	import { cartItems } from '$lib/cart.svelte.js';
+	import { cartItems } from '$lib/cart-state.svelte';
 
 	// show order confirmation modal
 	let showOrderModal = $state(false);
@@ -26,11 +24,7 @@
 </script>
 
 <main class="bg-rose-50 md:grid md:grid-cols-[5fr_2fr]">
-	{#if data.items.length > 0}
-		<Products {products} />
-	{:else}
-		<p>Products are loading...</p>
-	{/if}
+	<Products {products} />
 	<Cart {showModal} />
 	{#if showOrderModal}
 		<OrderDialog {closeModal} />

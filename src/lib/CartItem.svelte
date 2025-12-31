@@ -1,5 +1,5 @@
 <script>
-	import { removeFromCart } from '$lib/cart.svelte.js';
+	import { removeFromCart } from '$lib/cart-state.svelte';
 	let { cartItem } = $props();
 </script>
 
